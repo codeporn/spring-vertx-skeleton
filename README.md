@@ -19,4 +19,4 @@ The configuration is located in `./src/main/resources/skeleton.properties`.
 
 +  `vertx.fileCache.base`
 
-  Configures the Vert.x cache directory. Defaults to `java.io.tmpdir` if not set.
+    Configures the Vert.x cache directory. Defaults to `java.io.tmpdir` if not set.

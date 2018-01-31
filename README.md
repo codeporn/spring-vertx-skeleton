@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/codeporn/spring-vertx-skeleton.svg?branch=master)](https://travis-ci.org/codeporn/spring-vertx-skeleton)
-
 # spring-vertx-skeleton
 A Spring skeleton application, using vert.x and websockets.
+
+[![Build Status](https://travis-ci.org/codeporn/spring-vertx-skeleton.svg?branch=master)](https://travis-ci.org/codeporn/spring-vertx-skeleton)
 
 ## Usage
 
@@ -10,6 +10,7 @@ A Spring skeleton application, using vert.x and websockets.
 + deploy to local servlet container
 + open http://localhost:8080/spring-vertx-skeleton
 
+If you'd like to run the application with a different hostname/ip/port, you'll need to change the eventbus configuration. Please see the section below for details.
 
 ## Configuration
 

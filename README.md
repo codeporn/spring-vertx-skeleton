@@ -13,8 +13,10 @@ A Spring skeleton application, using vert.x and websockets.
 
 The configuration is located in `./src/main/resources/skeleton.properties`.
 
-+ `eventbus.server.` and `eventbus.client.`
-These properties configure the websocket/eventbus addresses. By default, the websocket opens and the web client connects to http://localhost:8088/eventbus/. You are able to change this according to your environment.
++ `eventbus.server.*` and `eventbus.client.*`
 
-+  `vertx.fileCache.base` 
-Configures the Vert.x cache directory. Defaults to `java.io.tmpdir` if not set.
+  These properties configure the websocket/eventbus addresses. By default, the websocket opens and the web client connects to http://localhost:8088/eventbus/. You are able to change this according to your environment.
+
++  `vertx.fileCache.base`
+
+  Configures the Vert.x cache directory. Defaults to `java.io.tmpdir` if not set.

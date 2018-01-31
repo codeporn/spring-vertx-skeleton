@@ -37,6 +37,9 @@ public class ContentService implements IContentService {
 
   @Override
   public int getStateCount() {
+    if (this.stateCount > maxStateCount) {
+      this.stateCount = 1;
+    }
     return this.stateCount++;
   }
 

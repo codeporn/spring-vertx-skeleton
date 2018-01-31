@@ -11,6 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public interface IContentService {
 
   /**
+   * Maximum index <code>https://jsonplaceholder.typicode.com</code> is able to deliver.
+   */
+  final static int maxStateCount = 100;
+
+  /**
    * Mapper for proocessing JSON data.
    */
   final static ObjectMapper mapper = new ObjectMapper();
@@ -26,7 +31,7 @@ public interface IContentService {
   final static List<String> validSources = Arrays.asList(new String[] { "comments", "posts" });
 
   /**
-   * Returns the current index state and increments automatically.
+   * Returns the current index state and increments automatically. Value is resetted as soon as it reaches {@link IContentService#maxStateCount}.
    *
    * @return the current state
    */

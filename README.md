@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/codeporn/spring-vertx-skeleton.svg?branch=master)](https://travis-ci.org/codeporn/spring-vertx-skeleton)
+
 # spring-vertx-skeleton
 A Spring skeleton application, using vert.x and websockets.
 

@@ -8,3 +8,9 @@
 
 <spring:eval expression="@environment.getProperty('eventBus.messageTargetAddress')" var="messageAddress" scope="request" />
 <spring:eval expression="@environment.getProperty('eventBus.commandTargetAddress')" var="commandAddress" scope="request" />
+
+
+<spring:eval expression="@environment.getProperty('eventBus.client.protocol')" var="clientProtocol" scope="request" />
+<spring:eval expression="@environment.getProperty('eventBus.client.host')" var="clientHost" scope="request" />
+<spring:eval expression="@environment.getProperty('eventBus.client.port')" var="clientPort" scope="request" />
+<spring:eval expression="@environment.getProperty('eventBus.client.path')" var="clientPath" scope="request" />

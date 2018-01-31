@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.kodestruktor.skeleton</groupId>
+  <artifactId>spring-vertx</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>spring-vertx-skeleton</name>
+  <url>https://github.com/codeporn/spring-vertx-skeleton</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.version>4.3.2.RELEASE</spring.version>
+    <jackson.version>2.8.2</jackson.version>
+    <vertx.version>3.3.3</vertx.version>
+  </properties>
+
+  <scm>
+    <connection>scm:git:https://github.com/codeporn/spring-vertx-skeleton.git</connection>
+    <developerConnection>scm:git:https://github.com/codeporn/spring-vertx-skeleton.git</developerConnection>
+    <url>https://github.com/codeporn/spring-vertx-skeleton</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Christoph Wende</name>
+      <email>christoph@kodestruktor.de</email>
+    </developer>
+  </developers>
+
+  <dependencies>
+  
+    <!-- Servlet -->
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+            
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+  
+    <!-- Logging -->
+    
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+
+    <!-- Spring -->
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+    <!-- Commons -->
+    
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.7</version>
+    </dependency>
+
+    <!-- Vert.x dependencies -->
+    
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
+    
+  </dependencies>
+
+  <build>
+  
+    <finalName>spring-vertx-skeleton</finalName>
+  
+    <plugins>
+    
+      <!-- to ignore workspace references -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <useProjectReferences>false</useProjectReferences>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+
+      <!-- to be able generating build numbers -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doCheck>false</doCheck>
+          <doUpdate>false</doUpdate>
+        </configuration>
+      </plugin>
+
+      <!-- to be able writing the build number into the manifest.mf file -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <Implementation-Build>${buildNumber}</Implementation-Build>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      
+    </plugins>
+   
+  </build>
+</project>

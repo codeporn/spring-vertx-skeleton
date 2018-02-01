@@ -25,7 +25,7 @@ public class ContentService implements IContentService {
   /**
    * Maintains the state of the content index to fetch.
    */
-  private int stateCount = 1;
+  private int stateCount = 0;
 
   /**
    * Maintains the state of the content source.
@@ -37,10 +37,11 @@ public class ContentService implements IContentService {
 
   @Override
   public int getStateCount() {
+    this.stateCount += 1;
     if (this.stateCount > maxStateCount) {
       this.stateCount = 1;
     }
-    return this.stateCount++;
+    return this.stateCount;
   }
 
   @Override

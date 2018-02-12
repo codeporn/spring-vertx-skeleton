@@ -86,7 +86,7 @@ public class ContentService implements IContentService {
     final String url = IContentService.sourceBaseUrl + "/" + this.stateSource + "/" + this.stateCount;
     try {
       final Content content = mapper.readValue(new URL(url), Content.class);
-      return content.getBody();
+      return content != null ? content.getBody() : "[No content found]";
     } catch (final IOException e) {
       LOG.warn("Unable to fetch content from URL [{}]", url, e);
     }

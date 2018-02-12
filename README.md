@@ -2,7 +2,7 @@
 A Spring skeleton application, using vert.x and websockets.
 
 [![Build Status](https://travis-ci.org/codeporn/spring-vertx-skeleton.svg?branch=master)](https://travis-ci.org/codeporn/spring-vertx-skeleton)
-
+[![Coverity Status](https://scan.coverity.com/projects/15028/badge.svg)](https://scan.coverity.com/projects/codeporn-spring-vertx-skeleton)
 ## Usage
 
 + clone project

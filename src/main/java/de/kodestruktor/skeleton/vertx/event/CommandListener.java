@@ -16,6 +16,7 @@ import de.kodestruktor.skeleton.vertx.service.content.IContentService;
 @Component
 public class CommandListener {
 
+  @SuppressWarnings("unused")
   private static final Logger LOG = LoggerFactory.getLogger(CommandListener.class);
 
   @Autowired

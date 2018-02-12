@@ -45,7 +45,10 @@ public interface IContentService {
   public String getStateSource();
 
   /**
+   * Switches the source and notifies the eventbus about the result.
    *
+   * @param newSource
+   *          the new source to set
    */
   public void switchSource(final String newSource);
 

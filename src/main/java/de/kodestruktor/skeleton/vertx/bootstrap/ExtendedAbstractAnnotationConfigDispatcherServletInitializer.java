@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 /**
  * Initializer extension which needed to use an {@link ExtendedDispatcherServlet}.
  *
- * @version $Id: ExtendedAbstractAnnotationConfigDispatcherServletInitializer.java 2 2016-09-15 14:11:50Z Christoph Wende $
+ * @author Christoph Wende
  */
 public abstract class ExtendedAbstractAnnotationConfigDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

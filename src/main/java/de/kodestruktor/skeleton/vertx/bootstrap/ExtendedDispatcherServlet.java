@@ -10,7 +10,7 @@ import org.springframework.web.util.UrlPathHelper;
 /**
  * Extended {@link DispatcherServlet} that throws an exception instead of a HTTP 404 if no handler was found.
  *
- * @version $Id: ExtendedDispatcherServlet.java 2 2016-09-15 14:11:50Z Christoph Wende $
+ * @author Christoph Wende
  */
 @SuppressWarnings("serial")
 public class ExtendedDispatcherServlet extends DispatcherServlet {

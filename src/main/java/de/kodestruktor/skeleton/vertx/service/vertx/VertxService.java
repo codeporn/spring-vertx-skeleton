@@ -36,6 +36,10 @@ public class VertxService implements IVertxService {
       @Override
       public void handle(final AsyncResult<String> event) {
         LOG.info("Message verticle deployed [{}]", Boolean.valueOf(event.succeeded()));
+        if(event.failed()) {
+          LOG.warn("Result: [{}]", event.result());
+          LOG.warn("Cause of failing deployment: [{}]", event.cause());
+        }
       }
     });
 

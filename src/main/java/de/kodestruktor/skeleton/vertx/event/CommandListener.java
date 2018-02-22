@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import de.kodestruktor.skeleton.vertx.service.content.IContentService;
+import de.kodestruktor.skeleton.vertx.service.content.ContentService;
 
 /**
  * Funnel for {@link CommandEvent}s.
@@ -20,7 +20,7 @@ public class CommandListener {
   private static final Logger LOG = LoggerFactory.getLogger(CommandListener.class);
 
   @Autowired
-  private IContentService contentService;
+  private ContentService contentService;
 
   /**
    * Handles a source switch request. <br>

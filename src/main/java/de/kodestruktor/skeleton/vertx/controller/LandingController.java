@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/*")
 public class LandingController {
 
+  @SuppressWarnings("unused")
   private static final Logger LOG = LoggerFactory.getLogger(LandingController.class);
 
   @RequestMapping(value = "")

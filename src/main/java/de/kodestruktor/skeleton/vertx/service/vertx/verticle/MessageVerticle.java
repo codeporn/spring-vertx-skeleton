@@ -11,10 +11,10 @@ import de.kodestruktor.skeleton.vertx.event.CommandEvent;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.bridge.PermittedOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
-import io.vertx.ext.web.handler.sockjs.PermittedOptions;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 
 /**
@@ -55,14 +55,13 @@ public class MessageVerticle extends AbstractVerticle {
     opts.addInboundPermitted(new PermittedOptions().setAddress(this.commandTargetAddress));
     opts.addOutboundPermitted(new PermittedOptions().setAddress(this.messageTargetAddress));
 
-    final SockJSHandler ebHandler = SockJSHandler.create(this.vertx).bridge(opts);
-    router.route("/" + this.serverPath + "/*").handler(ebHandler);
+    final SockJSHandler handler = SockJSHandler.create(this.vertx).bridge(opts);
+    router.route("/" + this.serverPath + "/*").handler(handler);
     router.route().handler(StaticHandler.create());
 
     this.vertx.createHttpServer().requestHandler(router::accept).listen(this.serverPort, this.serverHost);
     this.eventBus = this.vertx.eventBus();
     this.consume(this.commandTargetAddress);
-
   }
 
   /**

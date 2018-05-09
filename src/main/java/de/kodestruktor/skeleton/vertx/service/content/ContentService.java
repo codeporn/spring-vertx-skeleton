@@ -1,97 +1,71 @@
 package de.kodestruktor.skeleton.vertx.service.content;
 
-import java.io.IOException;
-import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import de.kodestruktor.skeleton.vertx.json.Content;
-import de.kodestruktor.skeleton.vertx.service.message.IMessageService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Service managing content and its state.
- *
  * @author Christoph Wende
  */
-@Service
-public class ContentService implements IContentService {
-
-  private static final Logger LOG = LoggerFactory.getLogger(ContentService.class);
+public interface ContentService {
 
   /**
-   * Maintains the state of the content index to fetch.
+   * Maximum index <code>https://jsonplaceholder.typicode.com</code> is able to deliver.
    */
-  private int stateCount = 0;
+  final static int maxStateCount = 100;
 
   /**
-   * Maintains the state of the content source.
+   * Mapper for proocessing JSON data.
    */
-  private String stateSource = "posts";
-
-  @Autowired
-  private IMessageService messageService;
-
-  @Override
-  public int getStateCount() {
-    this.stateCount += 1;
-    if (this.stateCount > maxStateCount) {
-      this.stateCount = 1;
-    }
-    return this.stateCount;
-  }
-
-  @Override
-  public String getStateSource() {
-    return this.stateSource;
-  }
+  final static ObjectMapper mapper = new ObjectMapper();
 
   /**
-   * Sets a new source and resets state count; only if passed source is valid according to {@link IContentService#validateSource(String)}.
+   * The endpoint from where to fetch contents.
+   */
+  final static String sourceBaseUrl = "https://jsonplaceholder.typicode.com";
+
+  /**
+   * Valid sources.
+   */
+  final static List<String> validSources = Arrays.asList(new String[] { "comments", "posts" });
+
+  /**
+   * Returns the current index state and increments automatically. Value is resetted as soon as it reaches {@link ContentService#maxStateCount}.
+   *
+   * @return the current state
+   */
+  public int getStateCount();
+
+  /**
+   * Returns the current source.
+   *
+   * @return the current source
+   */
+  public String getStateSource();
+
+  /**
+   * Switches the source and notifies the eventbus about the result.
+   *
+   * @param newSource
+   *          the new source to set
+   */
+  public void switchSource(final String newSource);
+
+  /**
+   * Validates a source.
    *
    * @param source
-   *          the source to set
-   * @return <code>true</code> if the new source was set, <code>false</code> otherwise
+   *          the source to validate
+   * @return the source if passed argument is valid, <code>null</code> otherwise
    */
-  private boolean setStateSource(final String source) {
-    if (StringUtils.isNotBlank(this.validateSource(source))) {
-      this.stateSource = source;
-      this.stateCount = 1;
-      return true;
-    }
-    return false;
-  }
+  public String validateSource(final String source);
 
-  @Override
-  public void switchSource(final String newSource) {
-    final boolean success = this.setStateSource(newSource);
-
-    if (success) {
-      this.messageService.broadcastSystemMessage("Switched source to [" + newSource + "]");
-    } else {
-      this.messageService.broadcastSystemMessage("Unkown source [" + newSource + "]");
-    }
-  }
-
-  @Override
-  public String validateSource(final String source) {
-    return StringUtils.isNotBlank(source) && validSources.contains(source) ? source : "";
-  }
-
-  @Override
-  public String fetchContent() {
-    final String url = IContentService.sourceBaseUrl + "/" + this.stateSource + "/" + this.stateCount;
-    try {
-      final Content content = mapper.readValue(new URL(url), Content.class);
-      return content != null ? content.getBody() : "[No content found]";
-    } catch (final IOException e) {
-      LOG.warn("Unable to fetch content from URL [{}]", url, e);
-    }
-
-    return "No body for content element at [" + url + "]";
-  }
+  /**
+   * Fetches content from {@link ContentService#sourceBaseUrl} according to the states values.
+   *
+   * @return the fetched content
+   */
+  public String fetchContent();
 
 }

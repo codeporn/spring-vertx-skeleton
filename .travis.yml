@@ -1,7 +1,16 @@
 language: java
 jdk: openjdk8
-install: true
-script: mvn clean install
-cache:
-  directories:
-  - $HOME/.m2
+env:
+  global:
+   - secure: "JXUTYd/ApUfD55lvFB4WO3TU+5S3ATd6KFMlTkSVTc5yLs7AB3yhUTrqa3LzUd1CGk4r74H7i6TBrUewB5rgbpTBGfeLcDtSRupT5aehAsqBDbl+kDFouUxbpH6TwNvJIwD0d9lV/8WIuEuQg88PLWvPDBXVxVxLaPNI0z5uFGwx52Y+8Yc/uTkm5wbloGAimtk6lUsAD2yREnqj1SZxdSffDTYUw2OUHFDzlytoX6XQezl3viC4oNWAS5Ft8vp0sXTit4HH9j8w5yh1dUWvMAJWPeysdKOEfAPx3wrz7fOeBpxLDYCVRINjiGpN3iBAD1TUdCECdxXclgge9QodRDvv1mAxsKkfi4wfprckNeIQAQRAVJZiWpQZd/GO+b0lAuAI8MvZGl6IGKC2/l7yUElrVUV7ubcah7f9CJP7dEDbEn/zGQBwkIRwc4zahXHByTbU6TcKr7/hUmiKkcwKwWTyWkkDmygsZfw2GrFhA96gDGtLWLXTDN7o2qH31YVn0bCSeGpgHiUOefjrTZtZ92MnLlurnLO30jp/N3VMqGz83rKKnYQQoqU9Fs80YAmvjn2p9wpWnKbh56kbFCj/rVaAPlUWrQkvf3DZMAK3dYkae2nTZAftY0kQkAndrfyYojL8/cgOH4PQ8B5x8DtuD0SgDC/FqFx/Qi7HGWxVjXw="
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+addons:
+  coverity_scan:
+    project:
+      name: "codeporn/spring-vertx-skeleton"
+      description: "spring-vertx-skeleton build submitted via Travis CI"
+    notification_email: christoph@kodestruktor.de
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn compile"
+    branch_pattern: coverity_scan

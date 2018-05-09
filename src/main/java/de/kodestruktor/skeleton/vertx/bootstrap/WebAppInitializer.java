@@ -22,7 +22,8 @@ import de.kodestruktor.skeleton.vertx.config.WebConfig;
 @Order(2)
 public class WebAppInitializer extends ExtendedAbstractAnnotationConfigDispatcherServletInitializer {
 
-  private static final Logger LOG = LoggerFactory.getLogger(VertxServiceConfig.class);
+  @SuppressWarnings("unused")
+  private static final Logger LOG = LoggerFactory.getLogger(WebAppInitializer.class);
 
   @Override
   protected Class<?>[] getRootConfigClasses() {
